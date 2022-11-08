@@ -58,3 +58,47 @@ function listenQuantityEvent() {
     });
   }
 
+//Vérifier la couleur et la quantité choisi
+function verifyInput(product_client) {
+    if((product_client.color == "") && (product_client.quantity < 1 || product_client.quantity > 100)){
+      colorQuantityMiss()
+    } else if (product_client.color == "") {
+      colorMiss();
+    } else if (product_client.quantity < 1 || product_client.quantity > 100) {
+      quantityMiss();
+    } else {
+      if (addLs(product_client)) {
+        productAdded();
+      } else {
+        excessQuantity();
+      }
+    }
+  }
+
+  //Ajouter le produit au localStorage et ajouter uniquement la quantité
+  function addLs(product_client) {
+    let cart = JSON.parse(localStorage.getItem("product_client")); // JSON.parse permet d'analyser locas.getItem comme du json 
+    if (cart == null) {
+      cart = [];
+      cart.push(product_client);
+      localStorage.setItem("product_client", JSON.stringify(cart));
+    } else {
+      let get_article = cart.find((cart_product) => product_client.id == cart_product.id && product_client.color == cart_product.color);
+      if (get_article) {
+        let nb = Number(product_client.quantity) + Number(get_article.quantity);
+        if (nb < 101){
+        get_article.quantity = nb;
+        localStorage.setItem("product_client", JSON.stringify(cart));
+        } else {
+          return false
+        }
+      } else {
+        cart.push(product_client);
+        localStorage.setItem("product_client", JSON.stringify(cart));
+      }
+    } return true
+  } 
+  
+
+  
+
