@@ -191,4 +191,27 @@ function changeInput() {
  let e_mail_error = document.querySelector("#emailErrorMsg");
  e_mail_error.style.color = "black";
 
- 
+ // Champs demandés pour le POST
+ let contact = {
+  firstName: "",
+  lastName: "",
+  address: "",
+  city: "",
+  email: "",
+};
+
+// Event au click
+btn_order.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  // Création d'une classe pour indiquer l'objet dans lequel iront les values du formulaire
+  class Form {
+    constructor() {
+      this.firstName = first_name.value;
+      this.lastName = last_name.value;
+      this.address = address.value;
+      this.city = city.value;
+      this.email = e_mail.value;
+    }
+  }
+
