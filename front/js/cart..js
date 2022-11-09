@@ -283,5 +283,50 @@ btn_order.addEventListener("click", (e) => {
     }
   }
 
+   // Vérification si la fonction return vrai ou faux
+   let firstname_valid = firstNameControl(),
+     lastname_valid = lastNameControl(),
+     adress_valid = addressControl(),
+     city_valid = cityControl(),
+     email_valid = emailControl();
+   if (
+     !firstname_valid ||
+     !lastname_valid ||
+     !adress_valid ||
+     !city_valid ||
+     !email_valid
+   )
+     return null;
+ 
+ 
+   // Push uniquement les Id dans le tableau des produits
+   let products = [];
+   for (let article_select of cart) {
+     products.push(article_select.id);
+   }
+ 
+   // Envoie de l'objet order vers le serveur
+   fetch("http://localhost:3000/api/products/order", {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify({
+       contact: FORM_VALUE,
+       products: products,
+     }),
+   }).then(async (response) => {
+     try {
+       const POST_ORDER = await response.json();
+       let orderId = POST_ORDER.orderId;
+ 
+       // Clear le localStorage
+       localStorage.clear();
+       window.location.assign("confirmation.html?id=" + orderId);
+     } catch (e) {
+       console.log(e);
+     }
+   });
+ });
 
 
