@@ -215,3 +215,21 @@ btn_order.addEventListener("click", (e) => {
     }
   }
 
+  // Appel de l'instance de classe Formulaire pour créer l'objet FORM_VALUE
+  const FORM_VALUE = new Form();
+ 
+  // Const regEx pour le formulaire
+  const REG_EX_LAST_FIRST_NAME = (value) => {
+    return /^[A-Za-z]{2,38}$/.test(value);
+  };
+  const REG_EX_CITY = (value) => {
+    return /^[A-Za-zéèàïêç\-\s]{1,50}\s+[0-9]{5}$/.test(value);
+  };
+  const REG_EX_ADDRESS = (value) => {
+    return /^[0-9]{1,5}\s+[A-Za-zéèàïêç\-\s]{2,50}$/.test(value);
+  };
+  const REG_EX_E_MAIL = (value) => {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
+  };
+
+
