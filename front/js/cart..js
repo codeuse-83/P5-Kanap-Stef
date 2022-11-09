@@ -78,7 +78,7 @@ function displayProducts() {
     .join("");
   listenDeleteEvents();
   changeInput();
-  totalQty();
+  totalQuantity();
 }
 
 //Récupération des changements de quantité pour les ajouter dans le localStorage
@@ -110,4 +110,40 @@ function changeInput() {
     });
   });
 }
+
+  //Sélection de l'article à supprimer
+  //filter permet d'identifier quel produit à était supprimer
+  function listenDeleteEvents() {
+    let btn_delete = document.querySelectorAll(".cart__item .deleteItem");
+    for (let i = 0; i < btn_delete.length; i++) {
+      btn_delete[i].addEventListener("click", () => {
+        let article = btn_delete[i].closest("article");
+        let data_id = article.getAttribute("data-id");
+        let data_color = article.getAttribute("data-color");
+        for (let j = 0; j < api_products.length; j++) {
+          if (
+            data_id == api_products[j]._id &&
+            data_color == api_products[j].color
+          ) {
+            cart = cart.filter(
+              (prod) =>
+                prod._id !== api_products[j]._id &&
+                prod.color !== api_products[j].color
+            );
+            localStorage.setItem("product_client", JSON.stringify(cart));
+            article.remove();
+            if (cart === null || cart == 0) {
+              document.querySelector("#totalQuantity").innerHTML = "0";
+              document.querySelector("#totalPrice").innerHTML = "0";
+              document.querySelector("h1").innerHTML =
+                "Vous n'avez plus d'article dans votre panier";
+            } else {
+              totalQuantity();
+              break;
+            }
+          }
+        }
+      });
+    }
+  }
 
