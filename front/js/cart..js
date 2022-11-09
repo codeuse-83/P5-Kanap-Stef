@@ -166,3 +166,29 @@ function changeInput() {
   total_quantity.innerHTML = number;
 }
 
+ // Gestion du formulaire et de l'envoie vers la page confirmation
+ // Formulaire querySelector
+ let first_name = document.querySelector("#firstName");
+ let last_name = document.querySelector("#lastName");
+ let address = document.querySelector("#address");
+ let city = document.querySelector("#city");
+ let e_mail = document.querySelector("#email");
+ let btn_order = document.querySelector("#order");
+ 
+ // Formulaire Error querySelector
+ let first_name_error = document.querySelector("#firstNameErrorMsg");
+ first_name_error.style.color = "black";
+ 
+ let last_name_error = document.querySelector("#lastNameErrorMsg");
+ last_name_error.style.color = "black";
+ 
+ let address_error = document.querySelector("#addressErrorMsg");
+ address_error.style.color = "black";
+ 
+ let city_error = document.querySelector("#cityErrorMsg");
+ city_error.style.color = "black";
+ 
+ let e_mail_error = document.querySelector("#emailErrorMsg");
+ e_mail_error.style.color = "black";
+
+ 
