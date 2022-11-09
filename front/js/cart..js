@@ -75,7 +75,6 @@ function displayProducts() {
     </div>
   </article>`;
     })
-    .join("");
   listenDeleteEvents();
   changeInput();
   totalQuantity();
