@@ -81,4 +81,33 @@ function displayProducts() {
   totalQty();
 }
 
+//Récupération des changements de quantité pour les ajouter dans le localStorage
+let quantity_error = document.createElement("span");
+function changeInput() {
+  let input_qty = document.querySelectorAll(".cart__item");
+  input_qty.forEach((input_qty) => {
+    input_qty.addEventListener("change", (e) => {
+      let article = input_qty.closest("article");
+      let data_id = article.getAttribute("data-id");
+      let data_color = article.getAttribute("data-color");
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === data_id && cart[i].color === data_color) {
+          if (e.target.value > 100) {
+            e.target.value = 100;
+            cart[i].quantity = 100;
+            localStorage.setItem("product_client", JSON.stringify(cart));
+          } else if (e.target.value < 1) {
+            e.target.value = 1;
+            cart[i].quantity = 1;
+            localStorage.setItem("product_client", JSON.stringify(cart));
+          } else {
+            cart[i].quantity = parseInt(e.target.value);
+            localStorage.setItem("product_client", JSON.stringify(cart));
+          }
+        }
+      }
+      totalQuantity();
+    });
+  });
+}
 
