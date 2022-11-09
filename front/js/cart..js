@@ -232,4 +232,56 @@ btn_order.addEventListener("click", (e) => {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
   };
 
+  // Control de la validité lastName
+  function lastNameControl() {
+    let last_name_form = FORM_VALUE.lastName;
+    if (REG_EX_LAST_FIRST_NAME(last_name_form)) {
+      last_name_error.innerHTML = "";
+      return true;
+    } else {
+      last_name_error.innerHTML =
+        "Le nom doit contenir 3 lettres minimum pas de caractères spéciaux ni de chiffres";
+      return false;
+    }
+  }
+
+  // Control de la validité address
+  function addressControl() {
+    let address_form = FORM_VALUE.address;
+    if (REG_EX_ADDRESS(address_form)) {
+      address_error.innerHTML = "";
+      return true;
+    } else {
+      address_error.innerHTML =
+        "Merci de renseigner votre adresse débutant par des chiffres";
+      return false;
+    }
+  }
+
+  // Control de la validité city
+  function cityControl() {
+    let city_form = FORM_VALUE.city;
+    if (REG_EX_CITY(city_form)) {
+      city_error.innerHTML = "";
+      return true;
+    } else {
+      city_error.innerHTML = `Merci de renseigner votre ville et votre code postal.`;
+      return false;
+    }
+  }
+
+  // Control de la validité email
+  function emailControl() {
+    let email_form = FORM_VALUE.email;
+    if (REG_EX_E_MAIL(email_form)) {
+      e_mail_error.innerHTML = "";
+      return true;
+    } else {
+      e_mail_error.innerHTML =
+        "E-mail non valide. Il doit contenir un @ d'un point suivi d'au maximum 3 lettres";
+      return false;
+    }
+  }
+
+
 
