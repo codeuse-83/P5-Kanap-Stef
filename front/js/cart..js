@@ -147,3 +147,22 @@ function changeInput() {
     }
   }
 
+  // Ajout de la quantité de chaque produit et le prix total
+ // Récupération du prix actuelle du produit depuis l'api-products grâce à findIndex
+  
+ function totalQuantity() {
+  let total_quantity = document.querySelector("#totalQuantity");
+  let total_price = document.querySelector("#totalPrice");
+  let number = 0;
+  let total = 0;
+  for (let j = 0; j < cart.length; j++) {
+    let current_index = api_products.findIndex((product) => {
+      return product._id == cart[j].id;
+    });
+    number += cart[j].quantity;
+    total += cart[j].quantity * api_products[current_index].price;
+  }
+  total_price.innerHTML = total;
+  total_quantity.innerHTML = number;
+}
+
