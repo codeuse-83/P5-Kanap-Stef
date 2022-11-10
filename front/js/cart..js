@@ -17,7 +17,7 @@ function nameOrder() {
   });
 }
 
-api_products(cart);
+getAPIProducts(cart);
 
 //Si l'article n'est pas présent dans le localStorage, renvoie d'un message
 async function getAPIProducts(products) {
